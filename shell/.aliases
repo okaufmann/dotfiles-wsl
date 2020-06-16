@@ -56,13 +56,18 @@ alias preview="fzf --preview 'bat --color \"always\" {}'"
 alias grep="grep --color=auto"
 alias top="sudo htop"
 alias f="forge"
-alias dc="docker-compose"
 alias jigsaw="./vendor/bin/jigsaw $@"
 alias d="./d $@"
 alias o="open ."
 alias jest="./node_modules/.bin/jest"
 # List all files colorized in long format
 alias l="ls -laF"
+alias du=ncdu
+
+# Docker
+alias docker=docker.exe
+alias docker-compose=docker-compose.exe
+alias dc="docker-compose"
 
 # Git
 # ---------------

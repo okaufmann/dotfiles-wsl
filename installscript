@@ -3,8 +3,6 @@
 # Hide "last login" line when starting a new terminal session
 touch $HOME/.hushlogin
 
-
-
 # Install zsh and oh-my-zsh
 sudo apt-get install zsh
 
@@ -39,10 +37,6 @@ ln -s $HOME/.dotfiles/shell/.vimrc $HOME/.vimrc
 rm $HOME/.vim
 ln -s $HOME/.dotfiles/shell/.vim $HOME/.vim
 
-# # Symlink the Mackup config
-# rm $HOME/.mackup.cfg
-# ln -s $HOME/.dotfiles/macos/.mackup.cfg $HOME/.mackup.cfg
-
 echo 'Install zsh theme remy'
 echo '------------'
 ln -s $HOME/.dotfiles/zshrc/remy.zsh-theme $HOME/.oh-my-zsh/custom/themes/remy.zsh-theme
@@ -51,12 +45,6 @@ ln -s $HOME/.dotfiles/zshrc/remy.zsh-theme $HOME/.oh-my-zsh/custom/themes/remy.z
 cd ~/.dotfiles/shell
 chmod +x z.sh
 
-# echo 'Install homebrew'
-# echo '----------------'
-# echo install homebrew
-# sudo rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
-# ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
 echo 'Install node version manager (nvm)'
 echo '-----------'
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
@@ -64,58 +52,39 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | b
 nvm install 12
 nvm use 12
 
-# echo 'Install pkg-config'
-# echo '------------------'
-# brew install pkg-config
-
-# echo 'Install wget'
-# echo '------------'
-# brew install wget
-
 # echo 'Install httpie'
 # echo '--------------'
-# brew install httpie
+sudo apt-get install httpie -y
 
-# echo 'Install ncdu'
-# echo '------------'
-# brew install ncdu
+echo 'Install ncdu'
+echo '------------'
+sudo apt-get install ncdu -y
 
-# echo 'Install hub'
-# echo '-----------'
-# brew install hub
+echo 'Install hub'
+echo '-----------'
+sudo apt-get install hub -y
 
-# echo 'Install ack'
-# echo '-----------'
-# brew install ack
+echo 'Install ack'
+echo '-----------'
+sudo apt-get install ack-grep -y
 
-# echo 'Install tldr'
-# echo '-----------'
-# brew install tldr
+echo 'Install tldr'
+echo '-----------'
+sudo apt-get install tldr -y
 
-# echo 'Install dig'
-# echo '-----------'
-# brew install dig
+echo 'Install nmap'
+echo '-----------'
+sudo apt-get install nmap -y
 
-# echo 'Install nmap'
-# echo '-----------'
-# brew install nmap
-
-# echo 'Install fzf'
-# echo '-----------'
-# brew install fzf
-
-# echo 'Install brew-cask'
-# echo '-----------------'
-# brew tap homebrew/cask-cask
-# brew install brew-cask
-
-# echo 'Install Visual Studio Code'
-# echo '-----------------'
-# brew cask install visual-studio-code
-
-# echo 'Install some nice quicklook plugins'
-# echo '-----------------------------------'
-# brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
+echo 'Install fzf'
+echo '-----------'
+linuxDistr=$(awk -F= '/^ID=/{print $2}' /etc/os-release)
+if [ "$linuxDistr" == "debian" ] || [ "$linuxDistr" == "rasbian" ]; then
+    sudo apt-get install fzf
+else
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
+fi
 
 # echo 'Install php'
 # echo '-----------'
@@ -149,76 +118,60 @@ nvm use 12
 # brew install redis
 # brew services start redis
 
-# echo 'Install yarn'
-# echo '------------'
-# brew install yarn
-
-# echo 'Install ghostscript'
-# echo '-------------------'
-# brew install ghostscript
-
-# echo 'Install mackup'
-# echo '--------------'
-# brew install mackup
-
 echo 'Install zsh-autosuggestions'
 echo '---------------------------'
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
-# echo 'Install zsh-autosuggestions'
-# echo '---------------------------'
-# brew install prettyping
+echo 'Install prettyping'
+echo '---------------------------'
+sudo apt-get install prettyping -y
 
-# echo 'Install nmap'
-# echo '---------------------------'
-# brew install nmap
+echo 'Install ffmpeg'
+echo '---------------------------'
+sudo apt-get install ffmpeg -y
 
-# echo 'Install ffmpeg'
-# echo '---------------------------'
-# brew install ffmpeg
+# echo 'Install composer'
+# echo '----------------'
+# cd ~/.dotfiles
+# EXPECTED_SIGNATURE="$(wget -q -O - https://composer.github.io/installer.sig)"
+# php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+# ACTUAL_SIGNATURE="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
 
-echo 'Install composer'
-echo '----------------'
-cd ~/.dotfiles
-EXPECTED_SIGNATURE="$(wget -q -O - https://composer.github.io/installer.sig)"
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-ACTUAL_SIGNATURE="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
+# if [ "$EXPECTED_SIGNATURE" != "$ACTUAL_SIGNATURE" ]
+# then
+#     echo 'ERROR: Invalid Composer installer signature'
+#     rm composer-setup.php
+# else
+#     php composer-setup.php --quiet
+#     rm composer-setup.php
+#     echo 'move composer to /usr/local/bin/composer'
+#     sudo mv -f composer.phar /usr/local/bin/composer
+# fi
 
-if [ "$EXPECTED_SIGNATURE" != "$ACTUAL_SIGNATURE" ]
-then
-    echo 'ERROR: Invalid Composer installer signature'
-    rm composer-setup.php
-else
-    php composer-setup.php --quiet
-    rm composer-setup.php
-    echo 'move composer to /usr/local/bin/composer'
-    sudo mv -f composer.phar /usr/local/bin/composer
-fi
+# echo 'Install cgr'
+# echo '------------'
+# composer global require consolidation/cgr
 
-echo 'Install cgr'
-echo '------------'
-composer global require consolidation/cgr
+# echo 'Install laravel envoy'
+# echo '---------------------'
+# cgr "laravel/envoy=~1.0"
 
-echo 'Install laravel envoy'
-echo '---------------------'
-cgr "laravel/envoy=~1.0"
+# echo 'Install phpunit-watcher'
+# echo '-----------------------'
+# cgr spatie/phpunit-watcher
 
-echo 'Install phpunit-watcher'
-echo '-----------------------'
-cgr spatie/phpunit-watcher
+# echo 'Install mixed-content-scanner-cli'
+# echo '---------------------------------'
+# cgr spatie/mixed-content-scanner-cli
 
-echo 'Install mixed-content-scanner-cli'
-echo '---------------------------------'
-cgr spatie/mixed-content-scanner-cli
+# echo 'Install irak/prestissimo'
+# echo '---------------------------------'
+# composer global require hirak/prestissimo # need to be installed via composer directly
 
-echo 'Install irak/prestissimo'
-echo '---------------------------------'
-composer global require hirak/prestissimo # need to be installed via composer directly
-
-echo 'Install laravel valet'
-echo '---------------------'
-cgr laravel/valet
-valet install
+# echo 'Install laravel valet'
+# echo '---------------------'
+# cgr laravel/valet
+# valet install
 
 echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'
