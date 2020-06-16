@@ -76,6 +76,23 @@ echo 'Install nmap'
 echo '-----------'
 sudo apt-get install nmap -y
 
+echo 'Install Pygments'
+echo '-----------'
+sudo apt-get -y install python3-pip
+pip3 install Pygments
+
+echo 'Install pbcopy'
+echo '-----------'
+sudo apt-get install xclip -y
+
+echo 'Install git standup'
+echo '-----------'
+curl -L https://raw.githubusercontent.com/kamranahmedse/git-standup/master/installer.sh | sudo sh
+
+echo 'Install zip'
+echo '-----------'
+sudo apt-get install zip -y
+
 echo 'Install fzf'
 echo '-----------'
 linuxDistr=$(awk -F= '/^ID=/{print $2}' /etc/os-release)
@@ -181,12 +198,4 @@ echo '1. Install menlo patched font included in ~/.dotfiles/misc https://gist.gi
 echo '2. Install patched solarized theme included in ~/.dotfiles/misc'
 echo '3. Allow sudo permittance with fingerprint. Futher instructions in ~/.dotfiles/misc/fingerprint.sh'
 
-echo '++++++++++++++++++++++++++++++'
-echo 'Some optional tidbits'
-
-echo '1. Make sure dropbox is running first. If you have not backed up via Mackup yet, then run `mackup backup` to symlink preferences for a wide collection of apps to your dropbox. If you already had a backup via mackup run `mackup restore` You'\''ll find more info on Mackup here: https://github.com/lra/mackup.'
-echo '2. Set some sensible os x defaults by running: $HOME/.dotfiles/macos/set-defaults.sh'
-echo '3. Make a .dotfiles-custom/shell/.aliases for your personal commands'
-
-echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'

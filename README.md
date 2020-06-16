@@ -27,9 +27,7 @@ You can install them by cloning the repository as `.dotfiles` in your home direc
     cd .dotfiles
     ./bootstrap
 
-The bootstrap script can be run by cd-ing into the `.dotfiles` directory and performing this command:
+Copy contents of
 
-```bash
-./bootstrap
-```
+
 
