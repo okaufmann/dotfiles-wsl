@@ -1,3 +1,7 @@
+[core]
+    autocrlf = true
+    safecrlf = false
+
 [push]
     default = simple
 
