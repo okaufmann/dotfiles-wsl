@@ -5,6 +5,9 @@
 [push]
     default = simple
 
+[credential]
+    helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-wincred.exe
+
 [alias]
     # inspired by https://laravel-news.com/bash-aliases
     st = "!f(){ git status -bs; printf \"\nIgnored files:\n\"; git ls-files -v | grep "^h " | cut -c 3-; };f"
